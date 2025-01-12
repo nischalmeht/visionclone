@@ -240,3 +240,115 @@ end: `600% top`,
 });
 }
 canvas()
+function canvas1(){
+  const canvas = document.querySelector("#page18>canvas");
+const context = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+
+window.addEventListener("resize", function () {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+render();
+});
+
+function files(index) {
+var data = `
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00001.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00002.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00003.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00004.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00005.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00006.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00008.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00009.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00010.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00011.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00012.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00013.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00014.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00015.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00016.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00017.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00018.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00019.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00020.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00021.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00022.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00023.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00024.png?raw=true
+https://github.com/aadilkhan08/Apple-vision/blob/main/Apple%20vision%20canvas%20images/Vision00025.png?raw=true
+
+`;
+return data.split("\n")[index];
+}
+
+const frameCount = 25;
+
+const images = [];
+const imageSeq = {
+frame: 1,
+};
+
+for (let i = 0; i < frameCount; i++) {
+const img = new Image();
+img.src = files(i);
+images.push(img);
+}
+
+gsap.to(imageSeq, {
+frame: frameCount - 1,
+snap: "frame",
+ease: `none`,
+scrollTrigger: {
+  scrub: 0.15,
+  trigger: `#page18`,
+  //   set start end according to preference
+  start: `top top`,
+  end: `80% top`,
+  scroller: `#main`,
+},
+onUpdate: render,
+});
+
+images[1].onload = render;
+
+function render() {
+scaleImage(images[imageSeq.frame], context);
+}
+
+function scaleImage(img, ctx) {
+var canvas = ctx.canvas;
+var hRatio = canvas.width / img.width;
+var vRatio = canvas.height / img.height;
+var ratio = Math.max(hRatio, vRatio);
+var centerShift_x = (canvas.width - img.width * ratio) / 2;
+var centerShift_y = (canvas.height - img.height * ratio) / 2;
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.drawImage(
+  img,
+  0,
+  0,
+  img.width,
+  img.height,
+  centerShift_x,
+  centerShift_y,
+  img.width * ratio,
+  img.height * ratio
+);
+}
+ScrollTrigger.create({
+
+trigger: "#page18",
+pin: true,
+// markers:true,
+scroller: `#main`,
+//   set start end according to preference
+start: `top top`,
+end: `80% top`,
+});
+}
+canvas1();
+
