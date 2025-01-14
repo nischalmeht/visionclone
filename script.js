@@ -352,3 +352,17 @@ end: `80% top`,
 }
 canvas1();
 
+var tl3 = gsap.timeline({
+  scrollTrigger:{
+      trigger:`#page21`,
+      start:`top top`,
+      scrub:1,
+      scroller:`#main`,
+      pin:true
+  }
+})
+
+
+tl3.to("#page21>#troff",{
+  opacity:0
+})
